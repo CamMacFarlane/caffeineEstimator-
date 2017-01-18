@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+  <h1>Hello</h1>
+
+  <p>World.</p>
+  Send this to server <input id="inputId" type="text" name="Send" value="Swag"><br>
+  <button id="apiButton" type="button">Click Me!</button>
+  <br>
+  Recieved is: <div id="recievedId"><div>
+
+</body>
+
+<script type="text/javascript" src="fetch.js"></script>
+<script>
+
+function downloadFunction() {
+  return function (e) {
+    console.log("click");
+    var value = document.getElementById("inputId").value;
+    var endpoint = document.location.origin + '/endpoint/' + value;
+    fetch(endpoint).then(function(response) {
+      if(response.ok) {
+        response.json().then(function(data) {  
+          console.log(data);
+          var innerRecievedHtml = document.getElementById("recievedId");
+          innerRecievedHtml.innerHTML = data;  
+        });
+      } else {
+        console.log('Network response was not ok.');
+      }
+    });
+  }
+}
+  var apiButton = document.getElementById('apiButton');
+  apiButton.addEventListener("click", downloadFunction(), false);
+</script>
+</html>
