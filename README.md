@@ -8,5 +8,4 @@ A simple python script to estimate the amount of caffeine in your body based off
 
 
 ## Run server
-`export FLASK_APP=server.py`
-`flask run`
+`python run.py`
