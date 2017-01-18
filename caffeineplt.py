@@ -2,6 +2,11 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as plticker
 import numpy as np
 
+import plotly.plotly as py
+import plotly.graph_objs as go
+
+from datetime import datetime
+
 artString = """
  ( (
     ) )
@@ -113,8 +118,18 @@ def processData():
             maxCaf = caf_pts[t]
     return caf_pts
 
-def plotCaffine(cafIntake):
+def plotCaffine2(cafIntake):
+    xl = [0]*24*days
+    now = datetime.now()  
+    for i in range(0, 24*days):
+        xl[i] = datetime(now.year, now.month, day = (now.day + int(i/24)), hour = i%24  )
 
+    data = [go.Scatter(
+          x=xl,
+          y=cafIntake)]
+    py.plot(data)    
+        
+def plotCaffine(cafIntake):
 
     Y = np.array(cafIntake)
     X = np.array(list(range(0, 24*days)))
@@ -136,4 +151,4 @@ def plotCaffine(cafIntake):
 
 collectData()
 c = processData()
-plotCaffine(c)
+plotCaffine2(c)
