@@ -151,4 +151,8 @@ def plotCaffine(cafIntake):
 
 collectData()
 c = processData()
-plotCaffine2(c)
+try: 
+    plotCaffine2(c)
+except:
+    plotCaffine(c)
+
